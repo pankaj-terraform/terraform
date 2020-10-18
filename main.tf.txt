@@ -1,0 +1,28 @@
+provider "aws" {
+  profile = "default"
+  region  = "us-east-2"
+}
+
+
+
+module "dynamodb_table" {
+
+  source   = "terraform-aws-modules/dynamodb-table/aws"
+
+  server_side_encryption_enabled = true
+  server_side_encryption_kms_key_arn = "arn:aws:kms:us-east-2:6148186:key/781d1e14a2d-80c5-f1802c3110ad"
+  name     = "my-test-table"
+  hash_key = "emp_id"
+
+  attributes = [
+    {
+      name = "emp_id"
+      type = "N"
+    }
+  ]
+
+  tags = {
+    env   = "test"
+    project = "devOps"
+  }
+}
