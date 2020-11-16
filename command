@@ -1,1 +1,1 @@
-terraform apply -var-file="variables/dev.tfvars"
+terraform apply -var-file="../tfvars/dev.tfvars"
