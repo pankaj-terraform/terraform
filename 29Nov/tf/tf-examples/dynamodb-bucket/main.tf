@@ -1,17 +1,6 @@
-locals {
-  default_tags = {
-    application_id   = var.application_id
-    environment      = var.environment
-    created_by       = var.created_by
-    stack_name       = var.stack_name
-    termination_date = var.termination_date
-    date_class       = var.date_class
-  }
-}
-
 module "create_dynamodb_table" {
 
-  source = "../../dynamodb"
+  source = "../../tf/dynamodb"
 
   table_object_name = var.table_object_name
   app_sys_id        = var.app_sys_id
@@ -41,5 +30,7 @@ module "create_dynamodb_table" {
   gsi_non_key_attributes     = var.gsi_non_key_attributes
   
   #Tags
-  default_tags = local.default_tags
+  default_tags = merge(map("application_id",var.application_id),map("environment",var.environment),
+				map("created_by",var.created_by),map("date_class",var.date_class),
+				map("termination_date",var.termination_date),map("stack_name",var.stack_name))
 }
