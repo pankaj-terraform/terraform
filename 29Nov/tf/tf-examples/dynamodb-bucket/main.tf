@@ -1,3 +1,15 @@
+locals {
+   default_tags = {
+	 application_id    = var.application_id
+	 environment       = var.environment
+     data_class        = var.data_class
+	 created_by 		= "DEPD"
+	 stack_name = "dynao_db Table"
+	 termintaion_date = "n/a"
+	 
+   }
+
+}
 module "create_dynamodb_table" {
 
   source = "../../tf/dynamodb"
@@ -29,8 +41,9 @@ module "create_dynamodb_table" {
   gsi_projection_type        = var.gsi_projection_type
   gsi_non_key_attributes     = var.gsi_non_key_attributes
   
+  #Global Tables
+  replica_region_name        = var.replica_region_name
+  
   #Tags
-  default_tags = merge(map("application_id",var.application_id),map("environment",var.environment),
-				map("created_by",var.created_by),map("date_class",var.date_class),
-				map("termination_date",var.termination_date),map("stack_name",var.stack_name))
+  default_tags = local.default_tags
 }

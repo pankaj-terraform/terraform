@@ -114,6 +114,14 @@ variable "gsi_non_key_attributes" {
   default     = []
 }
 
+## Global Tables ##
+
+variable "replica_region_name" {
+  description = "Region name of the replica."
+  type        = list(string)
+  default     = []
+}
+
 variable "application_id" {
   description = "Application ID."
   type        = string
@@ -122,19 +130,7 @@ variable "environment" {
   description = "Environment."
   type        = string
 }
-variable "created_by" {
-  description = "Created By."
-  type        = string
-}
-variable "stack_name" {
-  description = "Stack Name."
-  type        = string
-}
-variable "termination_date" {
-  description = "Termination Date."
-  type        = string
-}
-variable "date_class" {
+variable "data_class" {
   description = "Date Class."
   type        = string
 }
@@ -147,10 +143,4 @@ variable "app_sub_sys_id" {
   type        = string
 }
 
-## Tags ##
 
-variable "default_tags" {
-  description = "Map of Default tags"
-  type        = map(string)
-  default     = {}
-}

@@ -112,6 +112,14 @@ variable "gsi_non_key_attributes" {
   default     = []
 }
 
+## Global Tables ##
+
+variable "replica_region_name" {
+  description = "Region name of the replica."
+  type        = list(string)
+  default     = []
+}
+
 variable "app_sys_id" {
   description = "Application System ID."
   type        = string
