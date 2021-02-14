@@ -1,0 +1,18 @@
+{
+	"dmsDetails" : {
+		"dms_vpc_endpoint_service_name" : "com.amazonaws.us-east-2.dynamodb",
+		"dms_subnet_group_name" : "",
+		"dms_vpc_role_name" : "",
+		"dms_vpc_role_managed_policy_name" : "",
+		"dms_kinesis_access_role_name" : "",
+		"dms_db_cluster_parameter_group_name" : "",
+		"dms_db_parameter_group_name" : "",
+		"dms_vpc_security_group_name" : "",
+		"dms_replication_instance_security_group_name" : "",
+		"dms_kinesis_stream_private_endpoint_security_group_name" : "",
+		"dms_sts_private_endpoint_security_group_name" : "",
+		"dms_source_endpoint_rds_security_group_name" : "",
+		"dms_kinesis_stream_name":"",
+		"dms_replication_instance_kms_key_name":""
+	}
+}
