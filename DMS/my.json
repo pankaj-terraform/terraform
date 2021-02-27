@@ -1,18 +1,24 @@
 {
 	"dmsDetails" : {
+		"dms_vpc_id" : "1234",
 		"dms_vpc_endpoint_service_name" : "com.amazonaws.us-east-2.dynamodb",
-		"dms_subnet_group_name" : "",
-		"dms_vpc_role_name" : "",
-		"dms_vpc_role_managed_policy_name" : "",
-		"dms_kinesis_access_role_name" : "",
-		"dms_db_cluster_parameter_group_name" : "",
-		"dms_db_parameter_group_name" : "",
+		"dms_replication_subnet_group_name" : "",
+		"dms_service_role_name" : "",
+		"dms_service_role_managed_policy_name" : "",
+		"dms_kinesis_access_application_role_name" : "",		
+		"dms_aurora_cluster_parameter_group_name" : "",
+		"dms_aurora_instance_parameter_group_name" : "",		
 		"dms_vpc_security_group_name" : "",
-		"dms_replication_instance_security_group_name" : "",
+		"dms_vpc_security_group_name_outbound_kinesis_endpoint" : "",
+		"dms_vpc_security_group_name_outbound_sts_vpc_endpoint" : "",
+		"dms_vpc_security_group_name_outbound_rds_endpoint" : "",				
 		"dms_kinesis_stream_private_endpoint_security_group_name" : "",
+		"dms_kinesis_stream_private_endpoint_security_group_dms_replication_instance_ip" : "",
 		"dms_sts_private_endpoint_security_group_name" : "",
+		"dms_sts_private_endpoint_security_group_dms_replication_instance_ip" : "",
 		"dms_source_endpoint_rds_security_group_name" : "",
+		"dms_source_endpoint_rds_security_group_dms_replication_instance_ip" : "",
 		"dms_kinesis_stream_name":"",
-		"dms_replication_instance_kms_key_name":""
+		"dms_replication_instance_kms_key_id":""
 	}
 }
