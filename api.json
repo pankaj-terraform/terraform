@@ -1,0 +1,598 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "cln-rx-eapi",
+    "version": "v1"
+  },
+  "host": "api.sandbox.fmcna.com",
+  "basePath": "/api/v1/",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/rx": {},
+    "/rx/fill-status": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "client_Id",
+            "description": "Identify the application for authentication purposes",
+            "required": true,
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "client_secret",
+            "description": "Secret key for autehtication purposes",
+            "required": true,
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "x-amf-mediaType": "application/json",
+            "in": "body",
+            "name": "generated",
+            "schema": {
+              "$ref": "#/definitions/type"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "$ref": "#/definitions/type_1"
+            }
+          },
+          "400": {
+            "description": "",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "$ref": "#/definitions/type_2"
+            }
+          },
+          "404": {
+            "description": "",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "$ref": "#/definitions/type_2"
+            }
+          },
+          "405": {
+            "description": "",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "$ref": "#/definitions/type_2"
+            }
+          },
+          "415": {
+            "description": "",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "$ref": "#/definitions/type_2"
+            }
+          },
+          "500": {
+            "description": "Bad response from authorization server, or WSDL SOAP Fault error",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "$ref": "#/definitions/type_2"
+            }
+          },
+          "401": {
+            "description": "Unauthorized or invalid client application credentials"
+          }
+        }
+      }
+    },
+    "/health-check": {
+      "get": {
+        "description": "Used to check health for the api",
+        "parameters": [
+          {
+            "name": "client_Id",
+            "description": "Identify the application for authentication purposes",
+            "required": true,
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "client_secret",
+            "description": "Secret key for autehtication purposes",
+            "required": true,
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "$ref": "#/definitions/health-check"
+            }
+          },
+          "401": {
+            "description": "Unauthorized or invalid client application credentials"
+          },
+          "500": {
+            "description": "Bad response from authorization server, or WSDL SOAP Fault error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "type": {
+      "x-amf-examples": {
+        "cancel-fill-example": {
+          "audit": {
+            "transactionId": "aec44c80-82af-11eb-92d2-3448eda81990"
+          },
+          "originatingPharmacy": {
+            "pharmacyName": "FRESENIUS MEDICAL CARE PHARMACY SVC",
+            "storeId": "385102",
+            "address": {
+              "address1": "1001 DANKA WAY NORTH",
+              "address2": "SUITE 2",
+              "city": "ST. PETERSBURG",
+              "state": "FL",
+              "zip": "33716",
+              "phone": "8009473131"
+            }
+          },
+          "centralFillPharmacy": {
+            "pharmacyName": "mckesson",
+            "address": {
+              "address1": "address1",
+              "address2": "address2",
+              "city": "city",
+              "state": "FL",
+              "zip": "zip",
+              "phone": "1234567890"
+            }
+          },
+          "fillStatus": {
+            "status": "CNL",
+            "details": {
+              "orderNumber": "storeid-orderid",
+              "sequenceNumber": "0",
+              "itemCount": "1",
+              "cancelReason": "cancelReason"
+            }
+          }
+        },
+        "dispense-fill-example": {
+          "audit": {
+            "transactionId": "aec44c80-82af-11eb-92d2-3448eda81990"
+          },
+          "originatingPharmacy": {
+            "pharmacyName": "FRESENIUS MEDICAL CARE PHARMACY SVC",
+            "storeId": "385102",
+            "address": {
+              "address1": "11001 DANKA WAY NORTH",
+              "address2": "SUITE 2",
+              "city": "ST. PETERSBURG",
+              "state": "FL",
+              "zip": "33716",
+              "phone": "8009473131"
+            }
+          },
+          "centralFillPharmacy": {
+            "pharmacyName": "mckesson,",
+            "storeId": "store-id,",
+            "address": {
+              "address1": "address1",
+              "city": "city",
+              "state": "ST",
+              "zip": "zip",
+              "phone": "1234567890"
+            }
+          },
+          "fillStatus": {
+            "status": "DSP",
+            "details": {
+              "orderNumber": "storeid - orderid",
+              "sequenceNumber": "0",
+              "itemCount": "0",
+              "shippingAddress": {
+                "addressName": "address name",
+                "address": {
+                  "address1": "address 1",
+                  "address2": "address 2",
+                  "city": "city",
+                  "state": "ST",
+                  "zip": "zip",
+                  "phone": "1234567890"
+                }
+              },
+              "shipDate": "ship date",
+              "shippingCode": "shipping code",
+              "shipmentCost": "shipping cost",
+              "trackingNumber": "tracking number"
+            }
+          }
+        },
+        "reject-fill-example": {
+          "audit": {
+            "transactionId": "aec44c80-82af-11eb-92d2-3448eda81990"
+          },
+          "originatingPharmacy": {
+            "pharmacyName": "FRESENIUS MEDICAL CARE PHARMACY SVC",
+            "storeId": "385102",
+            "address": {
+              "address1": "11001 DANKA WAY NORTH",
+              "address2": "SUITE 2",
+              "city": "ST. PETERSBURG",
+              "state": "FL",
+              "zip": "33716",
+              "phone": "8009473131"
+            }
+          },
+          "centralFillPharmacy": {
+            "pharmacyName": "Mckesson",
+            "address": {
+              "address1": "address1",
+              "address2": "address2",
+              "city": "city",
+              "state": "ST",
+              "zip": "zip",
+              "phone": "1234567890"
+            }
+          },
+          "fillStatus": {
+            "status": "REJ",
+            "details": {
+              "orderNumber": "storeid - ordernumber",
+              "sequenceNumber": "0",
+              "itemCount": "1",
+              "rejCode": "2",
+              "rejReason": "reject reason"
+            }
+          }
+        }
+      },
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "audit",
+        "originatingPharmacy",
+        "centralFillPharmacy",
+        "fillStatus"
+      ],
+      "properties": {
+        "audit": {
+          "description": "unique id user is expected to send to track the transaction",
+          "type": "object",
+          "additionalProperties": true,
+          "required": [
+            "transactionId"
+          ],
+          "properties": {
+            "systemId": {
+              "description": "unique Id to track an event on target system",
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-_]+$"
+            },
+            "transactionId": {
+              "description": "unique Id that identifies specific request",
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-_]+$",
+              "minLength": 5,
+              "maxLength": 40
+            }
+          }
+        },
+        "originatingPharmacy": {
+          "description": "source pharmacy details",
+          "type": "object",
+          "additionalProperties": true,
+          "required": [
+            "address",
+            "pharmacyName"
+          ],
+          "properties": {
+            "storeId": {
+              "description": "Id of the store.",
+              "type": "string",
+              "maxLength": 15
+            },
+            "address": {
+              "$ref": "#/definitions/type_3"
+            },
+            "pharmacyName": {
+              "description": "Name of the store.",
+              "type": "string",
+              "maxLength": 50
+            }
+          }
+        },
+        "centralFillPharmacy": {
+          "description": "fmc pharmacy details",
+          "type": "object",
+          "additionalProperties": true,
+          "required": [
+            "address",
+            "pharmacyName"
+          ],
+          "properties": {
+            "storeId": {
+              "description": "Id of the store.",
+              "type": "string",
+              "maxLength": 15
+            },
+            "address": {
+              "$ref": "#/definitions/type_3"
+            },
+            "pharmacyName": {
+              "description": "Name of the store.",
+              "type": "string",
+              "maxLength": 50
+            }
+          }
+        },
+        "fillStatus": {
+          "description": "fill status on the order",
+          "type": "object",
+          "additionalProperties": true,
+          "required": [
+            "details",
+            "status"
+          ],
+          "properties": {
+            "details": {
+              "type": "object",
+              "additionalProperties": true,
+              "required": [
+                "orderNumber",
+                "sequenceNumber",
+                "itemCount"
+              ],
+              "properties": {
+                "orderNumber": {
+                  "description": "order number.",
+                  "type": "string"
+                },
+                "sequenceNumber": {
+                  "description": "The submission number of the order.",
+                  "type": "string"
+                },
+                "itemCount": {
+                  "description": "total items on the order",
+                  "type": "string"
+                },
+                "cancelReason": {
+                  "description": "reason to cancel the order",
+                  "type": "string"
+                }
+              }
+            },
+            "status": {
+              "description": "",
+              "enum": [
+                "CNL",
+                "DSP",
+                "REJ"
+              ],
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "type_1": {
+      "x-amf-examples": {
+        "201-successResponse-example": {
+          "transactionId": "21189750-c3ac-4854-839b-72da17d5747a",
+          "dateTime": "2021-MAR-12 21:35:46",
+          "message": "order number 123456  - DSP message received by FMC successfully"
+        }
+      },
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "transactionId",
+        "dateTime",
+        "message"
+      ],
+      "properties": {
+        "transactionId": {
+          "description": "unique id to track the transaction",
+          "type": "string"
+        },
+        "dateTime": {
+          "description": "time the request was received in the system",
+          "type": "string"
+        },
+        "message": {
+          "description": "status of the message processed",
+          "type": "string"
+        }
+      }
+    },
+    "type_2": {
+      "x-amf-examples": {
+        "400-errorResponse-example": {
+          "transactionId": "21189750-c3ac-4854-839b-72da17d5747a",
+          "dateTime": "2021-MAR-12 21:35:46",
+          "errorMessage": "invalid message"
+        },
+        "404-errorResponse-example": {
+          "transactionId": "21189750-c3ac-4854-839b-72da17d5747a",
+          "dateTime": "2021-MAR-12 21:35:46",
+          "errorMessage": "Resource not found"
+        },
+        "500-errorResponse-example": {
+          "transactionId": "21189750-c3ac-4854-839b-72da17d5747a",
+          "dateTime": "2021-MAR-12 21:35:46",
+          "errorMessage": "internal server error. please try again later"
+        }
+      },
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "transactionId",
+        "dateTime",
+        "errorMessage"
+      ],
+      "properties": {
+        "transactionId": {
+          "description": "unique id to track the transaction",
+          "type": "string"
+        },
+        "dateTime": {
+          "description": "time the request was received in the system",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "error message description",
+          "type": "string"
+        }
+      }
+    },
+    "health-check": {
+      "x-amf-examples": {
+        "health-check-example": {
+          "status": "UP",
+          "server": {
+            "host": "LAPTOP-FRESENIUS",
+            "ip": "192.168.1.1",
+            "timestamp": "2021-01-12T21:29:47.95+05:30",
+            "javaVendor": "AdoptOpenJDK",
+            "osName": "Windows 10",
+            "osVersion": "10.0",
+            "osArchitecture": "amd64",
+            "serverPort": 8081,
+            "applicationName": "health-check-resource-template"
+          },
+          "dependencies": [
+            "message-hub"
+          ]
+        }
+      },
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "status",
+        "server",
+        "dependencies"
+      ],
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "server": {
+          "$ref": "#/definitions/type_4"
+        },
+        "dependencies": {
+          "$ref": "#/definitions/type_5"
+        }
+      }
+    },
+    "type_3": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "address1",
+        "city",
+        "state",
+        "zip",
+        "phone"
+      ],
+      "properties": {
+        "address1": {
+          "description": "Address of the store.",
+          "type": "string",
+          "maxLength": 40
+        },
+        "address2": {
+          "description": "Address of the store.",
+          "type": "string",
+          "maxLength": 40
+        },
+        "city": {
+          "description": "City of the store.",
+          "type": "string",
+          "maxLength": 30
+        },
+        "state": {
+          "description": "State of the store.",
+          "type": "string",
+          "maxLength": 2
+        },
+        "zip": {
+          "description": "Zip code of the store.",
+          "type": "string",
+          "maxLength": 9
+        },
+        "phone": {
+          "description": "Store phone number.",
+          "type": "string",
+          "maxLength": 20
+        }
+      }
+    },
+    "type_4": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "host",
+        "ip",
+        "timestamp",
+        "javaVendor",
+        "osName",
+        "osVersion",
+        "osArchitecture",
+        "serverPort",
+        "applicationName"
+      ],
+      "properties": {
+        "host": {
+          "description": "host name",
+          "type": "string"
+        },
+        "ip": {
+          "description": "ip address",
+          "type": "string"
+        },
+        "timestamp": {
+          "description": "timestamp",
+          "type": "string"
+        },
+        "javaVendor": {
+          "description": "java vendor",
+          "type": "string"
+        },
+        "osName": {
+          "description": "operating system name",
+          "type": "string"
+        },
+        "osVersion": {
+          "description": "operating system version",
+          "type": "string"
+        },
+        "osArchitecture": {
+          "description": "operating system architecture",
+          "type": "string"
+        },
+        "serverPort": {
+          "description": "application listening port",
+          "type": "number"
+        },
+        "applicationName": {
+          "description": "mule application name",
+          "type": "string"
+        }
+      }
+    },
+    "type_5": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[ A-Za-z0-9_@./#&+-]*$"
+      }
+    }
+  }
+}
