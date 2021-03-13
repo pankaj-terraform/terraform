@@ -1,0 +1,297 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "fin-incontact-sapi",
+    "description": "System API to communicate with inContact SQL server database",
+    "version": "1.0"
+  },
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/match/phone": {
+      "post": {
+        "description": "Sends a phone match request to inContact DB",
+        "parameters": [
+          {
+            "name": "client_id",
+            "required": true,
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "client_secret",
+            "required": true,
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "x-amf-mediaType": "application/json",
+            "in": "body",
+            "name": "generated",
+            "schema": {
+              "$ref": "#/definitions/type"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "$ref": "#/definitions/type_1"
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": "Unauthorized or invalid client application credentials"
+          },
+          "409": {
+            "description": ""
+          },
+          "500": {
+            "description": "Bad response from authorization server, or WSDL SOAP Fault error",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "x-amf-examples": {
+                "Error_Response": {
+                  "message": "Internal Server Error",
+                  "errorMessage": {
+                    "errorCode": 500,
+                    "errorMessage": "Could not obtain connection from data source"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/match/account": {
+      "post": {
+        "description": "Sends a accountMatch request to inContact Db",
+        "parameters": [
+          {
+            "name": "client_id",
+            "required": true,
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "client_secret",
+            "required": true,
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "x-amf-mediaType": "application/json",
+            "in": "body",
+            "name": "generated",
+            "schema": {
+              "$ref": "#/definitions/type"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "$ref": "#/definitions/type_2"
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": "Unauthorized or invalid client application credentials"
+          },
+          "409": {
+            "description": ""
+          },
+          "500": {
+            "description": "Bad response from authorization server, or WSDL SOAP Fault error",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "x-amf-examples": {
+                "Error_Response": {
+                  "message": "Internal Server Error",
+                  "errorMessage": {
+                    "errorCode": 500,
+                    "errorMessage": "Could not obtain connection from data source"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health-check": {
+      "get": {
+        "description": "Get health check of the api",
+        "parameters": [
+          {
+            "name": "client_id",
+            "required": true,
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "client_secret",
+            "required": true,
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "x-amf-examples": {
+                "healthcheckResponse": {
+                  "status": "UP",
+                  "server": {
+                    "​​​​​​​ \"host\"": "DESKTOP-CB9MJNH",
+                    "ip": "192.168.1.5",
+                    "timestamp": "2021-01-12T21:29:47.95+05:30",
+                    "javaVendor": "AdoptOpenJDK",
+                    "osName": "Windows 10",
+                    "osVersion": "10.0",
+                    "osArchitecture": "amd64",
+                    "serverPort": 8081,
+                    "applicationName": "tooling-application-23daa260-54ef-11eb-a915-ba31b58700af"
+                  },
+                  "dependencies": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": "Unauthorized or invalid client application credentials"
+          },
+          "409": {
+            "description": ""
+          },
+          "500": {
+            "description": "Bad response from authorization server, or WSDL SOAP Fault error",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "x-amf-examples": {
+                "Error_Response": {
+                  "message": "Internal Server Error",
+                  "errorMessage": {
+                    "errorCode": 500,
+                    "errorMessage": "Could not obtain connection from data source"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "type": {
+      "example": {
+        "phone": "3173631998",
+        "dob": "1946-06-04",
+        "zip": "77063",
+        "guarantor": "69336"
+      },
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "phone": {
+          "$ref": "#/definitions/default"
+        },
+        "dob": {
+          "$ref": "#/definitions/default_3"
+        },
+        "zip": {
+          "$ref": "#/definitions/default_4"
+        },
+        "guarantor": {
+          "$ref": "#/definitions/default_5"
+        }
+      }
+    },
+    "type_1": {
+      "example": {
+        "match": true
+      },
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "match"
+      ],
+      "properties": {
+        "match": {
+          "type": "boolean"
+        }
+      }
+    },
+    "type_2": {
+      "example": {
+        "match": "No Matching Guarantor Accounts Found"
+      },
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "match"
+      ],
+      "properties": {
+        "match": {
+          "type": "string"
+        }
+      }
+    },
+    "default": {
+      "x-amf-union": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "default_3": {
+      "x-amf-union": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "default_4": {
+      "x-amf-union": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "default_5": {
+      "x-amf-union": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}
